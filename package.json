@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "app-layout": "@polymer/app-layout#1.0.0",
     "bower": "^1.8.0",
     "express": "^4.15.3",
     "fast-html-parser": "^1.0.1",
