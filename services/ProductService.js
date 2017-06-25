@@ -16,12 +16,12 @@ function findProductsBySearch(q) {
     })
     .then((html) => {
       const root = HTMLParser.parse(html);
-      const count = root.querySelector('.pagination-bar p').firstChild.rawText.replace(' Product(en) gevonden', '');
+      const count = root.querySelector('.pagination-bar p').firstChild.rawText.replace(' Product(en) gevonden', '').replace('.', '');
       const list = root.querySelectorAll('.product-list li').map((x) => {
         return {
-          id: x.querySelector('.text-holder p').rawText.replace(/[\n\t]/g, '').replace('Artikelnummer', ''),
-          title: x.querySelector('.text-holder h2 a').rawText.replace(/[\n\t]/g, ''),
-          text: x.querySelectorAll('.text-holder p')[1].rawText.replace(/[\n\t]/g, ''),
+          id: x.querySelector('.text-holder p').rawText.trim().replace('Artikelnummer', ''),
+          title: x.querySelector('.text-holder h2 a').rawText.trim(),
+          text: x.querySelectorAll('.text-holder p')[1].rawText.trim(),
           image: x.querySelector('a img').attributes['src'],
         };
       });

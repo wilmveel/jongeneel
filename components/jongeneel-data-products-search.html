@@ -1,0 +1,40 @@
+<link rel="import" href="polymer/polymer.html">
+
+<dom-module id="jongeneel-data-products-search">
+
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-data-products-search',
+
+      properties: {
+        q: {
+          type: String,
+          observer:"_loadData"
+        },
+        data: {
+          type: Array,
+          notify: true
+        },
+        count: {
+          type: String,
+          notify: true
+        }
+      },
+
+      _loadData: function (q) {
+        fetch('/api/products?q=' + q)
+          .then(function(res){
+            return res.json();
+          }).then(function(data){
+          console.log(data)
+          this.set('data', data.list)
+          this.set('count', data.count)
+        }.bind(this))
+      }
+    });
+  </script>
+
+</dom-module>

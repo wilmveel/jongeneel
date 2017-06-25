@@ -1,0 +1,48 @@
+<link rel="import" href="polymer/polymer.html">
+
+<link rel="import" href="paper-card/paper-card.html">
+
+<dom-module id="jongeneel-list-products">
+
+  <style>
+    paper-card{
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .card-header { @apply --paper-font-headline; }
+  </style>
+  <template>
+
+    <div>Aantal producten [[count]]</div>
+
+    <template is="dom-repeat" items="[[products]]">
+      <paper-card image="{{_getImage(item)}}">
+        <div class="card-content">
+        </div>
+        <div class="card-header">[[item.title]]</div>
+      </paper-card>
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-list-products',
+
+      properties: {
+        count: {
+          type: String,
+        },
+        products: {
+          type: Array,
+        }
+      },
+
+      _getImage: function(item){
+        return "https://www.jongeneel.nl/" + item.image
+      }
+    });
+  </script>
+
+</dom-module>
