@@ -16,7 +16,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest",
-    "postInstall": "bower install"
+    "postinstall": "bower install"
   },
   "flat": true
 }
