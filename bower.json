@@ -1,0 +1,22 @@
+{
+  "name": "jongeneel",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Willem Veelenturf <wveelenturf@bol.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/wilmveel/jongeneel",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "app-layout": "PolymerElements/app-layout#^2.0.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10"
+  }
+}
