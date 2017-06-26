@@ -12,7 +12,7 @@
       properties: {
         q: {
           type: String,
-          observer:"_loadData"
+          observer: "_loadData"
         },
         data: {
           type: Array,
@@ -26,13 +26,13 @@
 
       _loadData: function (q) {
         fetch('/api/products?q=' + q)
-          .then(function(res){
+          .then(function (res) {
             return res.json();
-          }).then(function(data){
-          console.log(data)
-          this.set('data', data.list)
-          this.set('count', data.count)
-        }.bind(this))
+          })
+          .then(function (data) {
+            this.set('data', data.list)
+            this.set('count', data.count)
+          }.bind(this))
       }
     });
   </script>

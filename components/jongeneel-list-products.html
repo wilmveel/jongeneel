@@ -5,24 +5,69 @@
 <dom-module id="jongeneel-list-products">
 
   <style>
-    paper-card{
-      max-width: 400px;
-      margin-bottom: 20px;
+
+
+    .grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
     }
 
-    .card-header { @apply --paper-font-headline; }
+    .item {
+      width: 368px;
+      margin-bottom: 16px;
+      padding: 0 16px;
+    }
+
+    @media (max-width: 600px) {
+
+      .grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .item {
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+    paper-card {
+      width: 100%;
+    }
+
+    .count{
+      margin: 0 16px;
+      margin-bottom: 20px;
+    }
+    .card-header {
+      padding: 0 16px;
+      height: 2em;
+    }
+
+    .card-content {
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow: ellipsis;
+      height: 1em;
+    }
   </style>
   <template>
 
-    <div>Aantal producten [[count]]</div>
+    <div class="count">Aantal producten [[count]]</div>
 
-    <template is="dom-repeat" items="[[products]]">
-      <paper-card image="{{_getImage(item)}}">
-        <div class="card-content">
+    <div class="grid">
+      <template is="dom-repeat" items="[[products]]">
+        <div class="item">
+          <paper-card image="{{_getImage(item)}}" image-height="200">
+            <div class="card-header">[[item.title]]</div>
+            <div class="card-content">
+              [[item.text]]
+            </div>
+          </paper-card>
         </div>
-        <div class="card-header">[[item.title]]</div>
-      </paper-card>
-    </template>
+      </template>
+    </div>
 
   </template>
 
@@ -39,7 +84,7 @@
         }
       },
 
-      _getImage: function(item){
+      _getImage: function (item) {
         return "https://www.jongeneel.nl/" + item.image
       }
     });

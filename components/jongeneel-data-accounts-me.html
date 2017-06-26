@@ -1,0 +1,35 @@
+<link rel="import" href="polymer/polymer.html">
+
+<dom-module id="jongeneel-data-accounts-me">
+
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-data-accounts-me',
+
+      properties: {
+        data: {
+          type: Array,
+          notify: true
+        },
+      },
+
+      observers: [
+        '_loadData()'
+      ],
+
+      _loadData: function () {
+        fetch('/api/accounts/me/')
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (data) {
+            this.set('data', data);
+          }.bind(this))
+      }
+    });
+  </script>
+
+</dom-module>
