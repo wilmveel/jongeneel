@@ -3,85 +3,44 @@
 <link rel="import" href="iron-icons/iron-icons.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 
-<link rel="import" href="app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="app-layout/app-header/app-header.html">
-<link rel="import" href="app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="app-route/app-location.html">
+<link rel="import" href="app-route/app-route.html">
 
-<link rel="import" href="paper-input/paper-input.html">
-<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="iron-pages/iron-pages.html">
 
-<link rel="import" href="jongeneel-list-products.html">
-<link rel="import" href="jongeneel-data-products-search.html">
+
+<link rel="import" href="jongeneel-layout.html">
+
+<link rel="import" href="jongeneel-page-products.html">
+<link rel="import" href="jongeneel-page-home.html">
 
 
 <dom-module id="jongeneel-app">
 
-  <style>
-
-    .main {
-      margin: 0 auto;
-    }
-
-    .content {
-      width: 1200px;
-      margin: 0 auto;
-    }
-
-    .search{
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      margin: 0 16px;
-      margin-bottom: 20px;
-    }
-
-    .search paper-input{
-      flex-grow: 1;
-    }
-
-    @media (max-width: 1200px) {
-      .content {
-        width: 100%;
-      }
-    }
-
-  </style>
 
   <template>
 
-    <div class="main">
+    <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
+    <app-route
+            route="{{route}}"
+            pattern="[[rootPath]]:page"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
 
+    <jongeneel-layout>
 
-      <app-header condenses reveals effects="waterfall">
-        <div class="content">
-          <app-toolbar>
-            <paper-icon-button icon="menu" onclick="startDrawer.toggle()"></paper-icon-button>
-            <div main-title></div>
-            <paper-icon-button icon="shopping-cart" onclick="endDrawer.toggle()"></paper-icon-button>
-          </app-toolbar>
-          <app-toolbar>
-            <div>Jongeneel App</div>
-          </app-toolbar>
-        </div>
-      </app-header>
+      <iron-pages
+              selected="[[page]]"
+              attr-for-selected="name"
+              fallback-selection="view404"
+              role="main">
 
-      <div class="content">
+        <jongeneel-page-home name="home"></jongeneel-page-home>
+        <jongeneel-page-products name="products"></jongeneel-page-products>
 
-        <div class="search">
-          <paper-input value="{{q}}"></paper-input>
-          <paper-button>Search</paper-button>
-        </div>
+      </iron-pages>
 
-        <jongeneel-data-products-search q="[[q]]" data="{{data}}" count="{{count}}"></jongeneel-data-products-search>
-        <jongeneel-list-products products="[[data]]" count="[[count]]"></jongeneel-list-products>
-      </div>
-
-      <app-drawer id="startDrawer" align="start"></app-drawer>
-      <app-drawer id="endDrawer" align="end"></app-drawer>
-
-
-    </div>
+    </jongeneel-layout>
   </template>
 
   <script>
@@ -89,9 +48,9 @@
       is: 'jongeneel-app',
 
       properties: {
-        q:{
+        page: {
           type: String,
-          value: "Hout"
+          value: "home"
         }
       }
     });

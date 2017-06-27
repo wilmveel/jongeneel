@@ -1,0 +1,30 @@
+<link rel="import" href="polymer/polymer.html">
+
+
+<dom-module id="jongeneel-filmstrip-quote">
+
+  <style>
+
+    :host {
+      display: block;
+    }
+
+  </style>
+
+  <template>
+    <content></content>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-filmstrip-quote',
+
+      properties: {
+        stars: {
+          type: Number,
+          value: 3
+        }
+      }
+    });
+  </script>
+</dom-module>

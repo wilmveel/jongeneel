@@ -1,0 +1,88 @@
+<link rel="import" href="polymer/polymer.html">
+
+<link rel="import" href="paper-card/paper-card.html">
+
+<link rel="import" href="jongeneel-filmstrip.html">
+<link rel="import" href="jongeneel-filmstrip-quote.html">
+
+<dom-module id="jongeneel-page-home">
+
+  <style>
+
+    #image {
+      width: 100%;
+    }
+
+    #image img {
+      width: 100%;
+    }
+
+    #filmstrip_quote {
+      height: 100px;
+    }
+
+    #marketing {
+      display: flex;
+      flex-direction: row;
+      overflow: visible;
+    }
+
+    #marketing div{
+      overflow: visible;
+    }
+
+    #marketing div img{
+      width:100%;
+    }
+
+    @media (max-width: 400px) {
+      #marketing {
+        flex-direction: column;
+      }
+    }
+
+    #filmstrip_product {
+      height: 100px;
+    }
+
+  </style>
+
+  <template>
+    <section id="image" >
+      <img src="/images/Jan-van-de-schuit-Kenniscentrum-Alkmaar.jpg" alt="Home Page"/>
+    </section>
+
+    <section id="filmstrip_quote">
+      <jongeneel-filmstrip >
+        <jongeneel-filmstrip-quote stars="3">"Ik ervaar altijd een geweldige service bij Jongeneel" - Timmermans en zn</jongeneel-filmstrip-quote>
+      </jongeneel-filmstrip>
+    </section>
+
+    <section id="marketing">
+      <div>
+        <img src="/images/BBQ-Actie.png" alt="Home Page"/>
+      </div>
+      <div>
+        <img src="/images/BBQ-Actie.png" alt="Home Page"/>
+      </div>
+    </section>
+
+    <section id="filmstrip_product">
+      <jongeneel-filmstrip >
+        <jongeneel-filmstrip-quote stars="3">"Ik ervaar altijd een geweldige service bij Jongeneel" - Timmermans en zn</jongeneel-filmstrip-quote>
+      </jongeneel-filmstrip>
+    </section>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-page-home',
+
+      properties: {},
+
+
+    });
+  </script>
+
+</dom-module>

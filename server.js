@@ -10,6 +10,8 @@ const app = express();
 app.use('/api/accounts', require('./api/AccountsApi'));
 app.use('/api/products', require('./api/ProductApi'));
 
+app.use('/images', express.static('images'));
+
 app.use('/components', express.static('components'));
 app.use('/components', express.static('bower_components'));
 

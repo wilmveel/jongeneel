@@ -1,0 +1,61 @@
+<link rel="import" href="polymer/polymer.html">
+
+
+<dom-module id="jongeneel-layout-menu">
+
+  <style>
+
+    :host{
+      display: block;
+      background-color: #004499;
+    }
+
+    .menu {
+      background-color: #004499;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .item {
+      display: block;
+      font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+      color:#ffffff;
+      padding: 16px;
+      text-decoration: none;
+      white-space: nowrap
+    }
+
+    @media (max-width: 600px) {
+      .menu{
+        flex-direction: column;
+      }
+    }
+
+  </style>
+
+  <template>
+
+    <div class="menu">
+      <a class="item" href="#/home">Home</a>
+      <a class="item" href="#/producten">Producten</a>
+      <a class="item" href="#/leveranciers">Leveranciers</a>
+      <a class="item" href="#/vakmanschap">Vakmanschap</a>
+      <a class="item" href="#/vestigingen">Vestigingen</a>
+      <a class="item" href="#/over_ons">Over ons</a>
+      <a class="item" href="#/contact">Contact</a>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-layout-menu',
+
+      properties: {
+        q:{
+          type: String,
+          value: "Hout"
+        }
+      }
+    });
+  </script>
+</dom-module>

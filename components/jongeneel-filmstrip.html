@@ -1,0 +1,79 @@
+<link rel="import" href="polymer/polymer.html">
+
+
+<dom-module id="jongeneel-filmstrip">
+
+  <style>
+
+    :host {
+      display: block;
+      position: relative;
+      height: 100%;
+    }
+
+    .content{
+
+      margin: 0 64px;
+
+    }
+
+    .arrow {
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border-top: .4rem solid black;
+      border-right: .4rem solid black;
+      box-shadow: 0 0 0 lightgray;
+      transition: all 200ms ease;
+      top:50%
+    }
+
+    .arrow.left {
+      left: 0;
+      transform: translate3d(0, -50%, 0) rotate(-135deg);
+    }
+
+    .arrow.right {
+      right: 0;
+      transform: translate3d(0, -50%, 0) rotate(45deg);
+    }
+
+    .arrow:hover {
+      border-top: .4rem solid orange;
+      border-right: .4rem solid orange;
+      box-shadow: .2rem -.2rem 0 black;
+    }
+
+    .arrow.left {
+      left: 16px;
+    }
+
+    .arrow.right {
+      right:  16px;
+    }
+
+  </style>
+
+  <template>
+
+    <a href="#" class="arrow left"></a>
+    <div class="content">
+      <content></content>
+    </div>
+    <a href="#" class="arrow right"></a>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-filmstrip',
+
+      properties: {
+        q: {
+          type: String,
+          value: "Hout"
+        }
+      }
+    });
+  </script>
+</dom-module>
