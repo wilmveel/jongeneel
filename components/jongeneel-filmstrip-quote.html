@@ -7,12 +7,49 @@
 
     :host {
       display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .stars {
+      min-width: 160px;
+      height: 100px;
+      line-height: 100px;
+      font-size: 24px;
+      color: orange;
+    }
+    .text {
+      height: 100px;
+      line-height: 100px;
+    }
+
+    .text span {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
     }
 
   </style>
 
   <template>
-    <content></content>
+    <div class="box">
+      <div class="stars">
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+      </div>
+      <div class="text">
+        <span><content></content></span>
+      </div>
+    </div>
+
   </template>
 
   <script>

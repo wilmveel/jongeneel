@@ -1,0 +1,35 @@
+<link rel="import" href="polymer/polymer.html">
+
+<dom-module id="jongeneel-data-products-id">
+
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-data-products-id',
+
+      properties: {
+        productId: {
+          type: String,
+          observer: "_loadData"
+        },
+        data: {
+          type: Object,
+          notify: true
+        },
+      },
+
+      _loadData: function (id) {
+        fetch('/api/products/' + id)
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (data) {
+            this.set('data', data)
+          }.bind(this))
+      }
+    });
+  </script>
+
+</dom-module>

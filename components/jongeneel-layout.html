@@ -13,6 +13,14 @@
 
   <style>
 
+    .title {
+      text-align: center;
+    }
+
+    .title img {
+      margin: 0 auto;
+    }
+
     .main {
       margin: 0 auto;
     }
@@ -22,19 +30,32 @@
       margin: 0 auto;
     }
 
-    .menu{
+    .menu {
       display: none;
     }
 
-    .logo{
+    .logo {
       height: 50px;
     }
 
+    .show-small {
+      display: none;
+    }
+
+    .show-large {
+      display: block;
+    }
+
     @media (max-width: 600px) {
-      .menu{
+      .menu {
         display: block;
       }
-      .show-large{
+
+      .show-small {
+        display: block;
+      }
+
+      .show-large {
         display: none;
       }
     }
@@ -52,15 +73,23 @@
     <div class="main">
 
 
-      <app-header condenses reveals effects="waterfall">
+      <app-header condenses reveals shadow effects="waterfall">
         <div class="content">
           <app-toolbar>
-            <img class="logo show-large" title="Houthandel Jongeneel" src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ" alt="Houthandel Jongeneel">
+            <img class="logo show-large" title="Houthandel Jongeneel"
+                 src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
+                 alt="Houthandel Jongeneel">
             <paper-icon-button class="menu" icon="menu" onclick="startDrawer.toggle()"></paper-icon-button>
-            <div main-title></div>
+            <div main-title class="title">
+              <img class="logo show-small" title="Houthandel Jongeneel"
+                   src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
+                   alt="Houthandel Jongeneel">
+            </div>
             <paper-icon-button icon="shopping-cart" onclick="endDrawer.toggle()"></paper-icon-button>
           </app-toolbar>
-          <jongeneel-layout-menu class="show-large"></jongeneel-layout-menu>
+
+          <jongeneel-layout-menu stick class="show-large"></jongeneel-layout-menu>
+
         </div>
       </app-header>
 
@@ -70,7 +99,9 @@
 
       <app-drawer id="startDrawer" align="start">
         <app-toolbar>
-          <img class="logo" title="Houthandel Jongeneel" src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ" alt="Houthandel Jongeneel">
+          <img class="logo" title="Houthandel Jongeneel"
+               src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
+               alt="Houthandel Jongeneel">
         </app-toolbar>
         <jongeneel-layout-menu class=""></jongeneel-layout-menu>
       </app-drawer>

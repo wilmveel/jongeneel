@@ -4,17 +4,37 @@
 
 <link rel="import" href="jongeneel-filmstrip.html">
 <link rel="import" href="jongeneel-filmstrip-quote.html">
+<link rel="import" href="jongeneel-filmstrip-product.html">
 
 <dom-module id="jongeneel-page-home">
 
   <style>
 
-    #image {
+    #splash {
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #splash img {
       width: 100%;
     }
 
-    #image img {
+    #splash .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
       width: 100%;
+      margin: auto 0;
+    }
+
+    #splash .buttons paper-button {
+      opacity: 0.5;
+      height: 40px;
+      margin: 20px 0;
+      width: 70%;
     }
 
     #filmstrip_quote {
@@ -28,11 +48,18 @@
     }
 
     #marketing div{
+      height: 200px;
       overflow: visible;
+      flex: 1 0;
     }
 
     #marketing div img{
-      width:100%;
+      height: 200px;
+      width: 100%;
+    }
+
+    #marketing div img{
+      width: 100%;
     }
 
     @media (max-width: 400px) {
@@ -43,12 +70,22 @@
 
     #filmstrip_product {
       height: 100px;
+      border-top: 4px solid blue;
+      border-bottom: 4px solid blue;
+    }
+
+    #bottom {
+      height: 400px;
     }
 
   </style>
 
   <template>
-    <section id="image" >
+    <section id="splash" >
+      <div class="buttons">
+        <paper-button style="background-color: orange;">Zoek je product</paper-button>
+        <paper-button style="background-color: blue;">Zoek je vestiging</paper-button>
+      </div>
       <img src="/images/Jan-van-de-schuit-Kenniscentrum-Alkmaar.jpg" alt="Home Page"/>
     </section>
 
@@ -63,15 +100,22 @@
         <img src="/images/BBQ-Actie.png" alt="Home Page"/>
       </div>
       <div>
-        <img src="/images/BBQ-Actie.png" alt="Home Page"/>
+        <img src="/images/Boom.png" alt="Home Page"/>
       </div>
     </section>
 
     <section id="filmstrip_product">
       <jongeneel-filmstrip >
-        <jongeneel-filmstrip-quote stars="3">"Ik ervaar altijd een geweldige service bij Jongeneel" - Timmermans en zn</jongeneel-filmstrip-quote>
+        <jongeneel-filmstrip-product product-id="ZH0865"></jongeneel-filmstrip-product>
+        <jongeneel-filmstrip-product product-id="OS3152"></jongeneel-filmstrip-product>
+        <jongeneel-filmstrip-product product-id="ZH0026"></jongeneel-filmstrip-product>
+        <jongeneel-filmstrip-product product-id="SO0583"></jongeneel-filmstrip-product>
       </jongeneel-filmstrip>
     </section>
+
+    <section id="bottom">
+    </section>
+
 
   </template>
 

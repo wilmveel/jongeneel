@@ -1,0 +1,41 @@
+<link rel="import" href="polymer/polymer.html">
+
+<link rel="import" href="jongeneel-data-products-id.html">
+
+<dom-module id="jongeneel-filmstrip-product">
+
+  <style>
+
+    :host {
+      display: block;
+      height: 100%;
+    }
+
+    img {
+      height: 100%;
+    }
+
+  </style>
+
+  <template>
+    <jongeneel-data-products-id product-id="[[productId]]" data="{{data}}"></jongeneel-data-products-id>
+    <img src="[[_getImage(data)]]" alt="[[data.title]]" />
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-filmstrip-product',
+
+      properties: {
+        productId: {
+          type: String
+        }
+      },
+
+      _getImage: function (item) {
+        return "https://www.jongeneel.nl/" + item.image
+      }
+
+    });
+  </script>
+</dom-module>

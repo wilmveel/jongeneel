@@ -20,17 +20,16 @@
 
   <template>
 
-    <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
+    <app-location route="{{route}}" use-hash-as-path></app-location>
     <app-route
             route="{{route}}"
-            pattern="[[rootPath]]:page"
+            pattern="/:page"
             data="{{routeData}}"
-            tail="{{subroute}}"></app-route>
+            tail="{{tail}}">
 
     <jongeneel-layout>
-
       <iron-pages
-              selected="[[page]]"
+              selected="[[routeData.page]]"
               attr-for-selected="name"
               fallback-selection="view404"
               role="main">
