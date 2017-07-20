@@ -2,8 +2,8 @@ const express = require('express');
 
 const port = process.env.PORT || 3000;
 
-const username = "barzijd";
-const password ="AvD!9841";
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
 
 const app = express();
 
@@ -20,4 +20,3 @@ app.use("/index.html", express.static(__dirname + '/index.html'));
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}`)
 })
-
