@@ -34,4 +34,3 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(null, null, null, null, null, 
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}`)
 });
-
