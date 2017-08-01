@@ -1,21 +1,25 @@
 const fetch = require('node-fetch');
 const HTMLParser = require('fast-html-parser');
 
-function findAccount() {
+function findAccount(token) {
 
-  const url = `https://www.jongeneel.nl/snippets/userInfoBox`;
+  const href = `https://www.jongeneel.nl/snippets/userInfoBox`;
   const opts = {
     headers: {
-      'Cookie': 'JSESSIONID=59BB9D002FCD278A14FF1EEA59B41FC6;',
+      'Cookie': `JSESSIONID=${token};`,
     }
   };
 
-  return fetch(url, opts)
+  return fetch(href, opts)
     .then((res) => {
       return res.text();
     })
     .then((html) => {
       const root = HTMLParser.parse(html);
+
+      if(root.querySelector('.login-form'))
+        throw new Error('Not authenticated')
+
       const name = root.querySelector('.logout-box .user-info span').rawText.replace(/[\n\t]/g, '').trim();
       return {
         name

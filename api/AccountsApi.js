@@ -5,13 +5,19 @@ const accountService = require('../services/AccountService')
 const app = express.Router();
 
 app.get("/me", (req, res) => {
-  accountService.findAccount()
+
+  const token = req.session.token;
+
+  if(!token) {
+    res.status(401).send();
+  }
+
+  accountService.findAccount(token)
     .then((data) => {
       res.send(data)
     })
     .catch(() => {
-      res.status(404);
-      res.send("Product not found")
+      res.status(404).send("Account not found")
     })
 
 })

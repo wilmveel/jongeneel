@@ -1,6 +1,6 @@
 const express = require('express');
 
-const productService = require('../services/ProductService')
+const facetService = require('../services/FacetService')
 
 const app = express.Router();
 
@@ -12,9 +12,10 @@ app.get("", (req, res) => {
   const opts = {
     q: req.query.q
   };
-  productService.findProductsBySearch(opts)
+
+  facetService.findFacetsBySearchTerm(opts)
     .then((data) => {
-      res.set('x-count', data.count).send(data.list)
+      res.send(data)
     })
     .catch(() => {
       res.status(400).send("Invalid input value")
