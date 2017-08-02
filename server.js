@@ -1,11 +1,21 @@
 const express = require('express');
+
 const expressSession = require('express-session');
+const expressBasicAuth = require('express-basic-auth');
 
 const swaggerUi = require('swagger-ui-express');
 
 const port = process.env.PORT || 3000;
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
 
 const app = express();
+
+if(username && password) {
+  app.use(expressBasicAuth({
+    users: {'jongeneel': 'jongeneel2017'}
+  }));
+}
 
 app.use(expressSession({
   secret: 'jongeneelsessionkey',
