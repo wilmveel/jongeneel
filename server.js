@@ -13,7 +13,8 @@ const app = express();
 
 if(username && password) {
   app.use(expressBasicAuth({
-    users: {'jongeneel': 'jongeneel2017'}
+    challenge: true,
+    users: {[username]: password}
   }));
 }
 
