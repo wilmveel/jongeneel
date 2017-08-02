@@ -1,0 +1,35 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="jongeneel-data-facets-search">
+
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-data-facets-search',
+
+      properties: {
+        q: {
+          type: String,
+          observer: "_loadData"
+        },
+        data: {
+          type: Array,
+          notify: true
+        }
+      },
+
+      _loadData: function (q) {
+        fetch('/api/facets?q=' + q)
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (data) {
+            this.set('data', data);
+          }.bind(this))
+      }
+    });
+  </script>
+
+</dom-module>

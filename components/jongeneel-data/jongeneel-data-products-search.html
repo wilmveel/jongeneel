@@ -1,4 +1,4 @@
-<link rel="import" href="polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
 
 <dom-module id="jongeneel-data-products-search">
 
@@ -27,12 +27,12 @@
       _loadData: function (q) {
         fetch('/api/products?q=' + q)
           .then(function (res) {
-            return res.json();
-          })
-          .then(function (data) {
-            this.set('data', data.list)
-            this.set('count', data.count)
-          }.bind(this))
+            return res.json()
+              .then(function (data) {
+                this.set('data', data)
+                this.set('count', data.count)
+              }.bind(this))
+          }.bind(this));
       }
     });
   </script>

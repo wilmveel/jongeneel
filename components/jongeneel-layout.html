@@ -7,7 +7,13 @@
 
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 
+<link rel="import" href="paper-item/paper-item.html">
+
 <link rel="import" href="jongeneel-layout-menu.html">
+<link rel="import" href="jongeneel-facets.html">
+
+<link rel="import" href="jongeneel-data/jongeneel-data-facets-search.html">
+<link rel="import" href="jongeneel-data/jongeneel-data-cart.html">
 
 <dom-module id="jongeneel-layout">
 
@@ -79,13 +85,14 @@
             <img class="logo show-large" title="Houthandel Jongeneel"
                  src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
                  alt="Houthandel Jongeneel">
-            <paper-icon-button class="menu" icon="menu" onclick="startDrawer.toggle()"></paper-icon-button>
+            <paper-icon-button class="menu" icon="menu" onclick="menuDrawer.toggle()"></paper-icon-button>
+            <paper-icon-button class="menu" icon="add" onclick="filterDrawer.toggle()"></paper-icon-button>
             <div main-title class="title">
               <img class="logo show-small" title="Houthandel Jongeneel"
                    src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
                    alt="Houthandel Jongeneel">
             </div>
-            <paper-icon-button icon="shopping-cart" onclick="endDrawer.toggle()"></paper-icon-button>
+            <paper-icon-button icon="shopping-cart" onclick="cartDrawer.toggle()"></paper-icon-button>
           </app-toolbar>
 
           <jongeneel-layout-menu stick class="show-large"></jongeneel-layout-menu>
@@ -97,7 +104,7 @@
         <content></content>
       </div>
 
-      <app-drawer id="startDrawer" align="start">
+      <app-drawer id="menuDrawer" align="start">
         <app-toolbar>
           <img class="logo" title="Houthandel Jongeneel"
                src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
@@ -105,7 +112,30 @@
         </app-toolbar>
         <jongeneel-layout-menu class=""></jongeneel-layout-menu>
       </app-drawer>
-      <app-drawer id="endDrawer" align="end"></app-drawer>
+
+      <app-drawer id="filterDrawer" align="start">
+        <app-toolbar>
+          <img class="logo" title="Houthandel Jongeneel"
+               src="https://www.jongeneel.nl/medias/?context=bWFzdGVyfHJvb3R8MTA1NjF8aW1hZ2UvcG5nfGg5Ny9oOGYvODgxNDQ3NzQxMDMzNC5wbmd8LQ"
+               alt="Houthandel Jongeneel">
+        </app-toolbar>
+        <div style="height: calc(100% - 64px); overflow: auto;">
+          <jongeneel-context-search q="{{q}}"></jongeneel-context-search>
+          <jongeneel-data-facets-search q="[[q]]" data="{{facets}}"></jongeneel-data-facets-search>
+          <jongeneel-facets facets="[[facets]]"></jongeneel-facets>
+        </div>
+      </app-drawer>
+
+      <app-drawer id="cartDrawer" align="end">
+
+        <jongeneel-data-cart data="{{cart}}"></jongeneel-data-cart>
+        <h1>Cart</h1>
+        <div style="height: calc(100% - 64px); overflow: auto;">
+          <template is="dom-repeat" items="[[cart]]">
+            <paper-item>[[item.amount]] - [[item.title]]</paper-item>
+          </template>
+        </div>
+      </app-drawer>
 
 
     </div>
@@ -113,14 +143,7 @@
 
   <script>
     Polymer({
-      is: 'jongeneel-layout',
-
-      properties: {
-        q: {
-          type: String,
-          value: "Hout"
-        }
-      }
+      is: 'jongeneel-layout'
     });
   </script>
 </dom-module>

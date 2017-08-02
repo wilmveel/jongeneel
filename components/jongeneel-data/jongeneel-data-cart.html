@@ -1,13 +1,13 @@
-<link rel="import" href="polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
 
-<dom-module id="jongeneel-data-accounts-me">
+<dom-module id="jongeneel-data-cart">
 
   <template>
   </template>
 
   <script>
     Polymer({
-      is: 'jongeneel-data-accounts-me',
+      is: 'jongeneel-data-cart',
 
       properties: {
         data: {
@@ -20,8 +20,18 @@
         '_loadData()'
       ],
 
+      ready: function(){
+        this._loadData();
+      },
+
       _loadData: function () {
-        fetch('/api/accounts/me/')
+        console.log('load data')
+
+        var opts = {
+          credentials: 'include'
+        };
+
+        fetch('/api/cart/', opts)
           .then(function (res) {
             return res.json();
           })

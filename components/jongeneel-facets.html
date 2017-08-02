@@ -1,0 +1,75 @@
+<link rel="import" href="polymer/polymer.html">
+
+<link rel="import" href="paper-card/paper-card.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
+
+<dom-module id="jongeneel-facets">
+
+  <style>
+    paper-card {
+      width: 100%;
+    }
+
+    paper-card .paper-header {
+      padding: 16px;
+    }
+
+    paper-card .paper-content {
+      padding: 16px;
+    }
+
+    .toggle{
+      font-size: 12px;
+      text-align: right;
+    }
+    .filter {
+      display: none;
+    }
+
+    .filter-top:nth-child(-n+4) {
+      display: block;
+    }
+
+    .all .filter{
+      display: block;
+    }
+  </style>
+  <template>
+
+    <template is="dom-repeat" items="[[facets]]">
+      <paper-card>
+        <div class="paper-header">
+          {{item.name}}
+        </div>
+        <div class="paper-content">
+          <template is="dom-repeat" items="[[item.values]]">
+            <div class="filter filter-top">
+              <paper-checkbox>[[item.name]] ([[item.count]])</paper-checkbox>
+            </div>
+          </template>
+          <div class="toggle" on-tap="expand">Toggle</div>
+        </div>
+      </paper-card>
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'jongeneel-facets',
+
+      properties: {
+        facets: {
+          type: Array
+        }
+      },
+
+      expand: function (e) {
+        console.log(e.target.parentNode)
+        e.target.parentNode.classList.toggle("all")
+      }
+
+    });
+  </script>
+
+</dom-module>

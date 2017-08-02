@@ -1,0 +1,42 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+
+<dom-module id="jongeneel-context-search">
+
+
+  <script>
+
+    var subject = new Rx.Subject();
+
+    Polymer({
+      is: 'jongeneel-context-search',
+
+      ready: function (e) {
+
+        subject.subscribe(
+          function (x) {
+            console.log('---q', x);
+            this.set('q', x)
+          }.bind(this));
+
+      },
+
+      _qChanged: function (val) {
+        subject.onNext(val);
+      },
+
+      properties: {
+        q: {
+          type: String,
+          value: "Hout",
+          observer: '_qChanged',
+          notify: true
+        }
+      }
+
+    });
+  </script>
+
+</dom-module>

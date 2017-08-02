@@ -1,5 +1,5 @@
 {
-  "swagger": "3.0",
+  "swagger": "2.0",
   "info": {
     "description": "Jongeneel webshop Api",
     "version": "0.0.1",
@@ -19,6 +19,25 @@
             "in": "query",
             "name": "q",
             "description": "Search term for products"
+          },
+          {
+            "in": "category",
+            "name": "category",
+            "description": "Category id to use for filtering."
+          },
+          {
+            "in": "filters",
+            "name": "filters",
+            "description": "Comma separated list of applied filters eg: 'product:Lat,facetLengthDimensions:300cm'"
+          },
+          {
+            "in": "sort",
+            "name": "sort",
+            "description": "Search term for products",
+            "type": "string",
+            "enum": [
+              "relevanceOrdered"
+            ]
           }
         ],
         "responses": {
@@ -40,12 +59,7 @@
           "400": {
             "description": "Invalid input value"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
     "/products/{id}": {
@@ -89,15 +103,45 @@
           "400": {
             "description": "Invalid input value"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
-
+    "/suggestions": {
+      "get": {
+        "summary": "Search suggestions",
+        "description": "List of search suggestions based on search term search term",
+        "tags": [
+          "suggestions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "Search term for products"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "headers": {
+              "x-count": {
+                "type": "integer",
+                "description": "Total amount of results"
+              }
+            },
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Suggestion"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input value"
+          }
+        }
+      }
+    },
     "/facets": {
       "get": {
         "summary": "Facets list ",
@@ -125,15 +169,9 @@
           "400": {
             "description": "Invalid input value"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
-
     "/cart": {
       "get": {
         "summary": "Products in cart",
@@ -143,23 +181,17 @@
         ],
         "responses": {
           "200": {
-            "description": "List of products",
+            "description": "List of products in cart",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Product"
+                "$ref": "#/definitions/Cart"
               }
             }
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
-
     "/cart/add": {
       "post": {
         "summary": "Add product to cart",
@@ -189,15 +221,9 @@
           "204": {
             "description": "Successfully added product to cart"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
-
     "/cart/checkout": {
       "post": {
         "summary": "Checkout cart",
@@ -219,15 +245,9 @@
           "204": {
             "description": "Successfully added product to cart"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
-
     "/auth/login": {
       "post": {
         "tags": [
@@ -277,25 +297,15 @@
         }
       }
     },
-    "/user/{username}": {
+    "/user/me": {
       "get": {
         "tags": [
           "user"
         ],
         "summary": "Get user by user name",
         "description": "",
-        "operationId": "getUserByName",
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -312,7 +322,142 @@
           }
         }
       }
+    },
+    "/projects": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Get list of stored projects",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Get list of orders",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Order"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Get list of orders",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderDetails"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+
+    "/invoices": {
+      "get": {
+        "tags": [
+          "invoices"
+        ],
+        "summary": "List of invoices",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Invoice"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/invoices/{id}": {
+      "get": {
+        "tags": [
+          "invoices"
+        ],
+        "summary": "Invoice details",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InvoiceDetail"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
     }
+
   },
   "securityDefinitions": {
     "api_key": {
@@ -408,7 +553,6 @@
         }
       }
     },
-
     "Facet": {
       "type": "object",
       "required": [
@@ -431,7 +575,6 @@
         }
       }
     },
-
     "FacetValue": {
       "type": "object",
       "required": [
@@ -442,12 +585,14 @@
         "name": {
           "type": "string"
         },
+        "active": {
+          "type": "boolean"
+        },
         "count": {
           "type": "integer"
         }
       }
     },
-
     "Cart": {
       "type": "object",
       "required": [
@@ -455,6 +600,9 @@
         "count"
       ],
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -463,15 +611,14 @@
         }
       }
     },
-
     "Checkout": {
       "type": "object",
       "required": [
         "name"
       ],
       "properties": {
-        "address": {
-          "$ref": "#/definitions/Address"
+        "project": {
+          "$ref": "#/definitions/Project"
         },
         "date": {
           "type": "string"
@@ -484,7 +631,6 @@
         }
       }
     },
-
     "Address": {
       "type": "object",
       "required": [
@@ -492,9 +638,6 @@
         "count"
       ],
       "properties": {
-        "contact": {
-          "type": "string"
-        },
         "address": {
           "type": "string"
         },
@@ -509,7 +652,6 @@
         }
       }
     },
-
     "PickUp": {
       "type": "object",
       "required": [
@@ -528,7 +670,6 @@
         }
       }
     },
-
     "Project": {
       "type": "object",
       "required": [
@@ -542,13 +683,134 @@
         "name": {
           "type": "string"
         },
-        "pickUp":{
+        "pickUp": {
           "$ref": "#/definitions/PickUp"
         },
-        "deliver":{
+        "deliver": {
           "$ref": "#/definitions/Address"
         }
       }
+    },
+    "Suggestion": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "link"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "PRODUCT"
+          ]
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "establishment": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "OrderDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Order"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "erpId": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "number"
+            },
+            "location": {
+              "type": "string"
+            },
+            "method": {
+              "type": "string",
+              "enum": ["ACCOUNT"]
+            },
+            "project": {
+              "$ref": "#/definitions/Project"
+            },
+            "products": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "Invoice":{
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "reference": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "open": {
+          "type": "number"
+        }
+      }
+    },
+
+    "InvoiceDetail":{
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Invoice"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "products": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          }
+        }
+      ]
     }
 
   },
