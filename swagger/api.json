@@ -224,6 +224,20 @@
         }
       }
     },
+    "/cart/clear": {
+      "post": {
+        "summary": "Remove all products from cart",
+        "description": "Remove all products from cart",
+        "tags": [
+          "cart"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully removed all products from cart"
+          }
+        }
+      }
+    },
     "/cart/checkout": {
       "post": {
         "summary": "Checkout cart",
